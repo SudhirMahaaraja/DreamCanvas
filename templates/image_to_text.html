@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamCanvas - Image to Text</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        #image-upload {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #uploaded-image {
+            margin-top: 10px;
+            max-width: 100%;
+            max-height: 400px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="title">DreamCanvas</div>
+        <div class="nav-buttons">
+            <a href="{{ url_for('index') }}" class="nav-btn">Text to Image</a>
+            <a href="{{ url_for('image_to_image') }}" class="nav-btn">Image to Image</a>
+            <a href="{{ url_for('image_to_text') }}" class="nav-btn active">Image to Text</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Image to Text</h1>
+
+        <p>Generate captions or descriptions for your images using AI!</p>
+
+        <div class="input-area">
+            <input type="file" id="image-upload" accept="image/*">
+            <img id="uploaded-image" src="#" alt="Uploaded Image" />
+            <button id="generate-btn">Generate Caption</button>
+        </div>
+
+        <div id="result-container" class="result-display" style="display: none;">
+            <h2>Generated Caption:</h2>
+            <div id="loading-animation" class="loader" style="display: none;"></div>
+            <div id="generated-caption"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/image_to_text.js') }}"></script>
+    <script>
+        document.getElementById('image-upload').addEventListener('change', function() {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const uploadedImage = document.getElementById('uploaded-image');
+                uploadedImage.src = e.target.result;
+                uploadedImage.style.display = 'block'; // Show the image
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
