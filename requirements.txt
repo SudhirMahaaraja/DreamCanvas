@@ -55,7 +55,7 @@ tenacity==9.0.0
 textblob==0.18.0.post0
 tokenizers==0.20.1
 toml==0.10.2
-torch==2.4.1+cu118
+torch==2.4.1
 torchaudio==2.4.1
 torchvision==0.19.1
 tornado==6.4.1
